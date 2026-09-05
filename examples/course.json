@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Web Development",
+    "description": "A structured path across selected categories and topics.",
+    "accessType": "free",
+    "categoryIds": ["CATEGORY_ID_1", "CATEGORY_ID_2"],
+    "topicIds": ["TOPIC_ID_1", "TOPIC_ID_2"],
+    "unlockDays": 10,
+    "requiredProgress": 100,
+    "passingScore": 70,
+    "certificateEnabled": true,
+    "published": false
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "prompt": "Which HTML element creates a hyperlink?",
+    "type": "mcq",
+    "options": ["<a>", "<link>", "<href>", "<nav>"],
+    "answer": "<a>",
+    "explanation": "The anchor element creates hyperlinks.",
+    "published": false
+  }
+]

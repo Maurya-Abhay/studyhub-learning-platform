@@ -1,0 +1,14 @@
+[
+  {
+    "name": "HTML",
+    "slug": "html",
+    "description": "Learn HTML from fundamentals to practical web structure.",
+    "icon": "<>"
+  },
+  {
+    "name": "CSS",
+    "slug": "css",
+    "description": "Learn modern CSS, layout and responsive design.",
+    "icon": "{}"
+  }
+]

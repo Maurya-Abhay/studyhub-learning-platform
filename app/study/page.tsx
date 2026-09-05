@@ -1,0 +1,27 @@
+import Link from 'next/link';
+import { ArrowRight, BrainCircuit, BookOpen, Search } from 'lucide-react';
+import { searchStudy, getStudyLibrary } from '@/lib/study-data';
+import { CategoryCard } from '@/components/study/category-card';
+import { Footer } from '@/components/ui/footer';
+
+export default async function StudyPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const params = await searchParams;
+  const query = (params.q ?? '').trim();
+  if (query) {
+    const results = await searchStudy(query);
+    const has = results.categories.length || results.courses.length || results.topics.length || results.dsa.length;
+    return <main className="page"><div className="container" style={{ padding: '34px 0 50px' }}>
+      <div className="eyebrow">Search results</div><h1 className="title" style={{ fontSize: 44, marginTop: 8 }}>Results for “{query}”</h1>
+      <form className="surface card search-page-form" style={{ marginTop: 18 }} method="get"><div className="search"><Search size={16}/><input name="q" defaultValue={query} placeholder="Search topics, courses or DSA problems..." aria-label="Search the learning library"/><button className="btn primary small" type="submit">Search</button></div></form>
+      {has ? <div className="search-results" style={{ marginTop: 25 }}>
+        {results.categories.length > 0 && <section><div className="eyebrow">Categories</div><div className="grid-3" style={{ marginTop: 10 }}>{results.categories.map(item => <Link className="surface card category-card" key={item.id} href={`/study/category/${item.slug}`}><h3>{item.name}</h3><p>{item.description}</p><span className="chip active">Open category</span></Link>)}</div></section>}
+        {results.courses.length > 0 && <section className="section-tight"><div className="eyebrow">Courses</div><div className="grid-3" style={{ marginTop: 10 }}>{results.courses.map(item => <Link className="surface card category-card" key={item.id} href={`/study/courses/${item.slug}`}><h3>{item.title}</h3><p>{item.description}</p><span className="chip active">{item.access_type === 'free' ? 'Free' : 'Paid'}</span></Link>)}</div></section>}
+        {results.topics.length > 0 && <section className="section-tight"><div className="eyebrow">Topics</div><div className="grid-3" style={{ marginTop: 10 }}>{results.topics.map(item => <Link className="surface card category-card" href={`/study/topic/${item.slug}`} key={item.id}><h3>{item.title}</h3><p>{item.summary}</p><div className="meta-row"><span className="chip">{item.difficulty}</span><span className="chip">{item.estimated_minutes} min</span></div></Link>)}</div></section>}
+        {results.dsa.length > 0 && <section className="section-tight"><div className="eyebrow">DSA</div><div className="grid-3" style={{ marginTop: 10 }}>{results.dsa.map(item => <Link className="surface card category-card" href={`/dsa/problem/${item.slug}`} key={item.id}><div className="category-icon"><BrainCircuit size={18}/></div><h3>{item.title}</h3><p>{item.summary}</p><div className="meta-row"><span className={`pill ${item.difficulty.toLowerCase()}`}>{item.difficulty}</span><span className="chip active">{item.pattern}</span></div></Link>)}</div></section>}
+      </div> : <div className="surface empty" style={{ marginTop: 18 }}><strong>No matches</strong><p>Nothing matched “{query}”. Try another course, topic or DSA problem.</p></div>}
+      <Footer/></div></main>;
+  }
+  const { categories, topics, error } = await getStudyLibrary();
+  const hours = topics.length ? Math.max(1, Math.round(topics.reduce((sum, topic) => sum + (topic.estimatedMinutes || 0), 0) / 60)) : 0;
+  return <main className="page"><div className="container" style={{ padding: '35px 0 50px' }}><div className="eyebrow">Study library</div><div className="section-head"><div><h1 className="title" style={{ fontSize: 46, marginTop: 8 }}>Explore every learning path.</h1><p className="subtitle" style={{ maxWidth: 720 }}>Find a category or topic and open it immediately. Public lessons stay readable without an account.</p></div><span className="chip active">{hours}h indexed</span></div><form className="surface card search-page-form" style={{ marginTop: 18 }} method="get"><div className="search"><Search size={16}/><input name="q" placeholder="Search topics, courses or DSA problems..." aria-label="Search the learning library"/><button className="btn primary small" type="submit">Search</button></div></form>{error ? <div className="surface empty" style={{ marginTop: 18 }}><strong>Study library unavailable</strong><p>{error}</p></div> : categories.length ? <div className="grid-3" style={{ marginTop: 18 }}>{categories.map(category => <CategoryCard key={category.id} item={category}/>)}</div> : <div className="surface empty" style={{ marginTop: 18 }}><div className="empty-icon"><BookOpen size={17}/></div><div><strong>No published categories yet</strong><p>Categories created in the admin portal will appear here automatically.</p></div></div>}<div className="surface card" style={{ marginTop: 18 }}><div className="eyebrow">Library at a glance</div><div className="stats-grid" style={{ marginTop: 12 }}><div className="stat"><BookOpen size={18}/><div><div className="stat-num">{categories.length}</div><div className="stat-label">Categories</div></div></div><div className="stat"><BookOpen size={18}/><div><div className="stat-num">{topics.length}</div><div className="stat-label">Topics</div></div></div></div></div><Footer/></div></main>;
+}

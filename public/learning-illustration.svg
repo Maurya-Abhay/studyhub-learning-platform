@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Student learning at a desk</title>
+  <desc id="desc">A cheerful student studying with a laptop, books and a globe.</desc>
+  <path d="M0 314h640" fill="none" stroke="#5dc5d2" stroke-width="8" stroke-linecap="round"/>
+  <path d="M38 60 66 16l22 53-35-11Z" fill="#f3bd32"/>
+  <path d="M166 30h38v38h-38z" fill="#2f9bb6" transform="rotate(-7 185 49)"/>
+  <path d="M254 32h34v45h-34z" fill="#ef5d58"/><circle cx="271" cy="25" r="15" fill="#ef5d58"/>
+  <path d="M374 34a31 31 0 1 1 0 62 31 31 0 0 1 0-62Z" fill="#fff" stroke="#174562" stroke-width="6"/><path d="M374 47v20l13 8" fill="none" stroke="#174562" stroke-width="5" stroke-linecap="round"/>
+  <path d="M500 35h48l-24 17 23 17h-47l24-17-24-17Z" fill="#f2c84b"/>
+  <path d="M90 121h70l-35-58-35 58Z" fill="#2b94b1"/><path d="M105 121v92M145 121v92" stroke="#174562" stroke-width="7"/><path d="M80 213h90" stroke="#174562" stroke-width="7" stroke-linecap="round"/>
+  <path d="M27 235c54-54 111-47 161-12 44 30 88 37 137 6 58-37 109-40 170-3 58 35 103 20 145-11" fill="none" stroke="#9bd8dc" stroke-width="3" stroke-dasharray="7 8"/>
+  <circle cx="76" cy="178" r="13" fill="#f05b68"/><path d="M70 172h12M76 166v25" stroke="#fff" stroke-width="3"/>
+  <path d="M494 158a57 57 0 1 1 0 114 57 57 0 0 1 0-114Z" fill="#58b9cb" stroke="#174562" stroke-width="5"/><path d="M443 214h102M494 161c-23 28-23 80 0 109M494 161c23 28 23 80 0 109" fill="none" stroke="#d8f2e9" stroke-width="3"/><path d="M451 185c28 14 58 14 86 0M451 244c28-14 58-14 86 0" fill="none" stroke="#d8f2e9" stroke-width="3"/>
+  <path d="M344 166c-6-39 20-66 56-66s62 27 56 66c-5 33-29 51-56 51s-51-18-56-51Z" fill="#9a5f42" stroke="#633f36" stroke-width="4"/>
+  <path d="M347 151c8-45 74-60 104-13-20-12-38-13-54-2-16 11-29 16-50 15Z" fill="#643d36"/>
+  <circle cx="377" cy="158" r="4" fill="#3d2932"/><circle cx="423" cy="158" r="4" fill="#3d2932"/><path d="M390 182c11 9 22 9 33 0" fill="none" stroke="#c34d51" stroke-width="4" stroke-linecap="round"/>
+  <path d="M298 260c4-48 32-67 72-67s68 19 72 67v54H298v-54Z" fill="#ed5262"/><path d="M335 215v99M405 215v99" stroke="#d94358" stroke-width="3"/>
+  <path d="M286 237c-22 1-29 24-32 45M454 237c22 1 29 24 32 45" fill="none" stroke="#9a5f42" stroke-width="16" stroke-linecap="round"/>
+  <path d="M164 226h143v88H164z" fill="#dce5e9" stroke="#174562" stroke-width="6"/><circle cx="235" cy="267" r="12" fill="#9aaeb9"/><path d="M145 315h192l-19 12H164l-19-12Z" fill="#174562"/>
+  <path d="M411 282h92v33h-92zM420 263h82v19h-82zM429 244h70v19h-70z" fill="#ec555c" stroke="#174562" stroke-width="3"/><path d="M416 315h95" stroke="#174562" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="586" cy="95" r="11" fill="#ef5d58"/><path d="M586 78v34M569 95h34" stroke="#ef5d58" stroke-width="4" stroke-linecap="round"/>
+</svg>

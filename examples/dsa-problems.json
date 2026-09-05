@@ -1,0 +1,22 @@
+[
+  {
+    "topicId": "DSA_TOPIC_ID",
+    "title": "Two Sum",
+    "slug": "two-sum",
+    "difficulty": "Easy",
+    "pattern": "Hash Map",
+    "summary": "Find two indices whose values add to the target.",
+    "problem": "...",
+    "examples": "Input: [2,7,11,15], target 9\nOutput: [0,1]",
+    "constraints": "...",
+    "hint": "Track values already seen.",
+    "bruteForce": "Try every pair.",
+    "optimized": "Use a hash map for complements.",
+    "timeComplexity": "O(n)",
+    "spaceComplexity": "O(n)",
+    "starterCode": "class Solution { }",
+    "solution": "...",
+    "testCases": [{"stdin":"[2,7,11,15]\n9","expected":"[0,1]"}],
+    "published": false
+  }
+]

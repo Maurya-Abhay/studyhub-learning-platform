@@ -1,0 +1,5 @@
+[
+  {"name":"Arrays","slug":"arrays","description":"Array patterns and techniques.","sortOrder":1,"published":true},
+  {"name":"Strings","slug":"strings","description":"String manipulation and patterns.","sortOrder":2,"published":true},
+  {"name":"Dynamic Programming","slug":"dynamic-programming","description":"DP patterns and optimization.","sortOrder":3,"published":true}
+]

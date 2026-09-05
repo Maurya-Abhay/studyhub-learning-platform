@@ -1,0 +1,15 @@
+[
+  {
+    "title": "HTML Final Assessment",
+    "courseId": "COURSE_ID",
+    "durationMinutes": 30,
+    "passingScore": 70,
+    "unlockDays": 10,
+    "requiredProgress": 100,
+    "maxAttempts": 1,
+    "randomQuestions": true,
+    "randomOptions": true,
+    "questionIds": [],
+    "published": false
+  }
+]

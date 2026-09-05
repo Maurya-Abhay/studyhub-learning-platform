@@ -1,0 +1,20 @@
+[
+  {
+    "title": "What is HTML?",
+    "slug": "what-is-html",
+    "difficulty": "Beginner",
+    "estimatedMinutes": 10,
+    "summary": "Understand what HTML is and how it gives structure to every web page.",
+    "concept": "HTML (HyperText Markup Language) is the standard language used to structure content on the web. It describes what each piece of content means, such as a heading, paragraph, link, image, or form.",
+    "explanation": "HTML uses elements made from tags. A browser reads those elements and builds the page structure. HTML is about meaning and structure; CSS controls appearance and JavaScript adds behavior.",
+    "mentalModel": "Think of HTML as the frame of a house: it creates rooms and doors, while CSS paints the rooms and JavaScript makes the doors work.",
+    "realExample": "A blog post usually uses one h1 for its title, p elements for paragraphs, and a elements for links to related articles.",
+    "codeExample": "",
+    "codeLanguage": "html",
+    "output": "",
+    "commonMistakes": ["Using HTML for visual styling instead of CSS", "Skipping meaningful semantic elements"],
+    "practiceTask": "Create a page with one heading, two paragraphs, and a link to another website.",
+    "interviewQuestions": ["What is HTML used for?", "What is the difference between HTML, CSS, and JavaScript?"],
+    "published": true
+  }
+]
