@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BarChart3, Bell, BookOpen, CalendarDays, ChevronRight, DatabaseBackup, FileText, LayoutDashboard, ListChecks, LogOut, Users, BrainCircuit, Award, FolderKanban, Sparkles, Route } from 'lucide-react';
+import { BarChart3, Bell, BookOpen, CalendarDays, ChevronRight, DatabaseBackup, FileText, LayoutDashboard, ListChecks, LogOut, Users, BrainCircuit, Award, FolderKanban, Sparkles, Route, UserRound } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Topbar } from '@/components/ui/topbar';
@@ -122,6 +122,10 @@ export function DashboardShell({ children, admin = false }: { children: React.Re
               </div> : null}
             </div>)}
           </div>
+          <Link href="/profile" className={`dashboard-sidebar-profile ${pathname === '/profile' ? 'active' : ''}`}>
+            <UserRound size={15} />
+            <span>Profile</span>
+          </Link>
           <button type="button" className="dashboard-sidebar-logout" onClick={logout}>
             <LogOut size={15} />
             <span>Logout</span>
