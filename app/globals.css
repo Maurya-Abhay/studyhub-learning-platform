@@ -4017,7 +4017,8 @@ html.dark .topbar { background: rgba(7, 11, 20, .78); border-color: rgba(124, 14
 .category-page .list-row .chip { padding: 5px 8px; font-size: 10px; }
 .category-page .list-row .icon-btn { width: 30px; height: 30px; }
 .admin-manager-page > div > .two-col,
-.admin-manager-page > .two-col { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 12px; }
+.admin-manager-page > .two-col,
+.category-page > .two-col { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .admin-manager-page .surface.card { padding: 14px; }
 .admin-manager-page .list-row { padding: 10px 0; gap: 9px; }
 .admin-manager-page .list-row strong { font-size: 13px; }
@@ -4025,6 +4026,17 @@ html.dark .topbar { background: rgba(7, 11, 20, .78); border-color: rgba(124, 14
 .admin-manager-page .list-row .topic-actions { gap: 6px; }
 .admin-manager-page .list-row .chip { padding: 5px 8px; font-size: 10px; }
 .admin-manager-page .list-row .icon-btn { width: 30px; height: 30px; }
+.admin-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; margin-top: 4px; border-top: 1px solid var(--line); }
+.admin-pagination-actions { display: flex; align-items: center; gap: 10px; }
+.admin-pagination .icon-btn { width: 30px; height: 30px; }
+.topic-history-tools { display: flex; flex-direction: row !important; align-items: center; gap: 8px; margin-bottom: 10px; }
+.topic-history-tools .search { flex: 1 1 auto; width: auto; min-width: 0; }
+.topic-history-filter { flex: 0 0 150px; width: 150px; height: 36px; padding: 0 10px; margin-left: auto; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--text); font-size: 11px; }
+.topic-history-filter:focus { outline: 2px solid color-mix(in srgb, var(--brand) 28%, transparent); outline-offset: 1px; }
+@media (max-width: 560px) { .topic-history-tools { align-items: stretch; flex-direction: column !important; } .topic-history-filter { flex-basis: 36px; width: 100%; } }
+.admin-manager-page > div > .two-col > .surface.card:last-child,
+.category-page > .two-col > .surface.card:last-child { max-height: 720px; overflow-y: auto; }
+.roadmap-existing-list { max-height: 560px; overflow-y: auto; }
 .admin-manager-page .question-bank { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .admin-manager-page .question-bank:last-child { border-bottom: 0; }
 .admin-manager-page .question-bank-head { display: grid; gap: 8px; }
@@ -4773,6 +4785,7 @@ b {
 }
 
 .roadmap-admin-columns {
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   margin-top: 12px !important;
 }

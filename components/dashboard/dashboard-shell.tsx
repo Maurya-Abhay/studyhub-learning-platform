@@ -127,7 +127,7 @@ export function DashboardShell({ children, admin = false }: { children: React.Re
             <span>Logout</span>
           </button>
         </aside>
-        <main className={`dashboard-main ${!isAdmin && pathname !== '/dashboard' ? 'learner-page' : ''} ${pathname.startsWith('/admin/') ? 'admin-compact-page' : ''} ${pathname === '/profile' ? 'profile-page' : ''} ${pathname === '/admin/categories' ? 'category-page' : ''} ${['/admin/topics', '/admin/courses', '/admin/questions', '/admin/tests', '/admin/dsa'].includes(pathname) ? 'admin-manager-page' : ''}`}>
+        <main className={`dashboard-main ${!isAdmin && pathname !== '/dashboard' ? 'learner-page' : ''} ${pathname.startsWith('/admin/') ? 'admin-compact-page' : ''} ${pathname === '/profile' ? 'profile-page' : ''} ${pathname === '/admin/categories' ? 'category-page' : ''} ${['/admin/topics', '/admin/courses', '/admin/roadmaps', '/admin/questions', '/admin/tests', '/admin/dsa'].includes(pathname) ? 'admin-manager-page' : ''}`}>
           {(isAdmin || pathname === '/profile') && adminPageLabels[pathname] ? <div className="portal-breadcrumb">{pathname === '/admin' ? 'Dashboard' : `Dashboard / ${adminPageLabels[pathname]}`}</div> : null}
           {children}
         </main>
