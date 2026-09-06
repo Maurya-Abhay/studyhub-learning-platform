@@ -19,22 +19,20 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="footer-links" aria-label="Footer navigation">
-          <Link href="/study">
-            Notes
-            <ArrowUpRight size={13} />
-          </Link>
-
-          <Link href="/study/courses">
-            Courses
-            <ArrowUpRight size={13} />
-          </Link>
-
-          <Link href="/login">
-            Login
-            <ArrowUpRight size={13} />
-          </Link>
-        </div>
+        <nav className="footer-nav" aria-label="Footer navigation">
+          <span className="footer-nav-label">Explore StudyHub</span>
+          <div className="footer-links">
+            <Link href="/study">Notes <ArrowUpRight size={13} /></Link>
+            <Link href="/study/courses">Courses <ArrowUpRight size={13} /></Link>
+            <Link href="/login">Login <ArrowUpRight size={13} /></Link>
+            <Link href="/privacy">Privacy <ArrowUpRight size={13} /></Link>
+            <Link href="/terms">Terms <ArrowUpRight size={13} /></Link>
+          </div>
+        </nav>
+      </div>
+      <div className="container footer-bottom">
+        <span>© 2026 StudyHub</span>
+        <span>Learn with structure. Practice with purpose.</span>
       </div>
     </footer>
   );

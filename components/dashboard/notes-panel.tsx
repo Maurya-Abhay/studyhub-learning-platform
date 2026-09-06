@@ -47,7 +47,7 @@ export function NotesPanel({ notes }: { notes: Note[] }) {
     }
   }
 
-  if (!notes.length) return <div className="empty">Saved notes will appear here when you add them from a topic.</div>;
+  if (!notes.length) return <div className="notes-empty-state"><span className="notes-empty-icon"><Save size={16} /></span><div><strong>No saved notes yet</strong><p>Add notes from any topic workspace and they will appear here.</p></div></div>;
 
   return <div className="notes-reader">
     <aside className="notes-reader-nav" aria-label="Saved notes">

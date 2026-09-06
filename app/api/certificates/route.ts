@@ -9,6 +9,9 @@ function codeFor(slug: string) {
 }
 
 export async function GET(request: Request) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
   const limiter = rateLimit(request, { key: 'certificate-verify', limit: 30, windowMs: 60_000 });
   if (!limiter.allowed) return rateLimitedResponse(limiter.retryAfter);
   const code = new URL(request.url).searchParams.get('code')?.trim().slice(0, 100);
@@ -20,7 +23,7 @@ export async function GET(request: Request) {
     if (!data) return NextResponse.json({ valid: false, error: 'Certificate not found.' }, { status: 404 });
     const profile = Array.isArray(data.profiles) ? data.profiles[0] : data.profiles;
     const course = Array.isArray(data.courses) ? data.courses[0] : data.courses;
-    return NextResponse.json({ valid: !data.revoked_at, certificate: { certificate_code: data.certificate_code, issued_at: data.issued_at, revoked_at: data.revoked_at, learner_name: profile?.name ?? 'Learner', course_title: course?.title ?? 'Course', course_slug: course?.slug ?? null } }, { headers: { 'Cache-Control': 'public, max-age=30, stale-while-revalidate=60' } });
+    return NextResponse.json({ valid: !data.revoked_at, certificate: { certificate_code: data.certificate_code, issued_at: data.issued_at, revoked_at: data.revoked_at, learner_name: profile?.name ?? 'Learner', course_title: course?.title ?? 'Course', course_slug: course?.slug ?? null } }, { headers: { 'Cache-Control': 'no-store' } });
   } catch { return NextResponse.json({ error: 'Certificate verification is temporarily unavailable.' }, { status: 503 }); }
 }
 

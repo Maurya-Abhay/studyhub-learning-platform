@@ -136,9 +136,9 @@ function PublicShellInner({ children, categories = [], topics = [], dsaTopics = 
             })}
           </nav>
 
-          {categories.length ? <div className="public-sidebar-section">
-            <button type="button" className="public-section-toggle" aria-expanded={categoriesOpen} onClick={() => setCategoriesOpen((value) => !value)}><Tags size={14} /><span>Notes</span><ChevronRight size={14} /></button>
-            {categoriesOpen ? <div className="public-topic-nav">{categories.map((category) => {
+          <div className="public-sidebar-section">
+            {categories.length ? <button type="button" className="public-section-toggle" aria-expanded={categoriesOpen} onClick={() => setCategoriesOpen((value) => !value)}><Tags size={14} /><span>Notes</span><ChevronRight size={14} /></button> : <Link href="/study" className={`public-section-toggle ${pathname.startsWith('/study') ? 'active' : ''}`} onClick={closeMobileMenu}><Tags size={14} /><span>Notes</span><ChevronRight size={14} /></Link>}
+            {categoriesOpen && categories.length ? <div className="public-topic-nav">{categories.map((category) => {
               const categoryTopics = topics.filter((topic) => topic.categoryId === category.id);
               const expanded = expandedCategory === category.id;
               const toggleCategory = () => setExpandedCategory(expanded ? '' : category.id);
@@ -147,7 +147,7 @@ function PublicShellInner({ children, categories = [], topics = [], dsaTopics = 
                 {expanded ? <div className="public-topic-items">{categoryTopics.map((topic) => <Link key={topic.id} href={`/study/topic/${topic.slug}`} className={`public-topic-link ${pathname === `/study/topic/${topic.slug}` ? 'active' : ''}`} onClick={closeMobileMenu}>{topic.title}</Link>)}</div> : null}
               </div>;
             })}</div> : null}
-          </div> : null}
+          </div>
 
           <Link href="/study/courses" className={`public-nav-link ${pathname.startsWith('/study/courses') ? 'active' : ''}`} onClick={closeMobileMenu}>
             <span className="public-nav-icon"><Layers3 size={15} strokeWidth={1.8} /></span>

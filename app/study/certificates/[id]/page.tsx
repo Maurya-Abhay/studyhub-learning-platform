@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { ArrowLeft, Award, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
-import { createAdminClient } from '@/lib/supabase/admin';
 import { CertificateActions } from '@/components/study/certificate-actions';
 
 type Certificate = { certificate_code: string; score: number; issued_at: string; revoked_at: string | null; profiles: { name: string | null } | null; courses: { title: string | null } | null };
@@ -9,19 +9,19 @@ type Certificate = { certificate_code: string; score: number; issued_at: string;
 export default async function CertificatePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const supabase = await createClient();
-  let client;
-  try { client = createAdminClient(); } catch { client = supabase; }
-  const { data: row } = await client.from('certificates').select('certificate_code,score,issued_at,revoked_at,user_id,course_id').eq('certificate_code', id).maybeSingle();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect('/login');
+  redirect(`/dashboard/certificates/${encodeURIComponent(id)}`);
+  const { data: row } = user ? await supabase.from('certificates').select('certificate_code,score,issued_at,revoked_at,user_id,course_id').eq('certificate_code', id).eq('user_id', user.id).maybeSingle() : { data: null };
   let certificate: Certificate | null = null;
   if (row) {
     const [{ data: profile }, { data: course }] = await Promise.all([
-      client.from('profiles').select('name').eq('id', row.user_id).maybeSingle(),
-      client.from('courses').select('title').eq('id', row.course_id).maybeSingle(),
+      supabase.from('profiles').select('name').eq('id', row.user_id).maybeSingle(),
+      supabase.from('courses').select('title').eq('id', row.course_id).maybeSingle(),
     ]);
     certificate = { ...row, profiles: profile, courses: course } as unknown as Certificate;
   }
   const valid = Boolean(certificate && !certificate.revoked_at);
-  const { data: { user } } = await supabase.auth.getUser();
   const profile = certificate?.profiles;
   const course = certificate?.courses;
   const issued = certificate ? new Date(certificate.issued_at) : null;

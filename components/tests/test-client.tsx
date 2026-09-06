@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ChevronLeft, ChevronRight, Maximize, Send } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Maximize, Minimize, Send } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { DashboardShell } from '@/components/dashboard/dashboard-shell';
 
@@ -12,12 +12,13 @@ export default function TestPage(){
   const params=useParams<{id:string}>();
   const router=useRouter();
   const [test,setTest]=useState<Test|null>(null); const [questions,setQuestions]=useState<Question[]>([]); const [answers,setAnswers]=useState<Record<string,unknown>>({});
-  const [attemptId,setAttemptId]=useState(''); const [step,setStep]=useState(0); const [time,setTime]=useState(0); const [message,setMessage]=useState('Loading assessment...'); const [busy,setBusy]=useState(false); const [events,setEvents]=useState<string[]>([]); const startedRef=useRef(false);
+  const [attemptId,setAttemptId]=useState(''); const [step,setStep]=useState(0); const [time,setTime]=useState(0); const [message,setMessage]=useState('Loading assessment...'); const [busy,setBusy]=useState(false); const [events,setEvents]=useState<string[]>([]); const startedRef=useRef(false); const [focusMode,setFocusMode]=useState(false);
   useEffect(()=>{let cancelled=false; async function load(){const response=await fetch(`/api/tests?id=${params.id}`);const data=await response.json();if(!response.ok){setMessage(data.error||'Unable to load assessment.');return;}setTest(data.test);setQuestions(data.questions??[]);setTime(data.test.duration_minutes*60);const start=await fetch('/api/tests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'start',testId:params.id})});const started=await start.json();if(cancelled)return;if(!start.ok){setMessage(started.error||'Unable to start assessment.');return;}setAttemptId(started.attempt.id);setMessage('');startedRef.current=true;}load();return()=>{cancelled=true}},[params.id]);
   useEffect(()=>{if(!attemptId)return;const timer=setInterval(()=>setTime(value=>{if(value<=1){clearInterval(timer);return 0;}return value-1}),1000);const save=setInterval(()=>{void fetch('/api/tests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'save',testId:params.id,attemptId,answers,suspiciousEvents:events})})},10000);const onVisibility=()=>{if(document.hidden)setEvents(prev=>[...prev,'tab_hidden'].slice(-50));};document.addEventListener('visibilitychange',onVisibility);return()=>{clearInterval(timer);clearInterval(save);document.removeEventListener('visibilitychange',onVisibility)}},[attemptId,params.id,answers,events]);
   useEffect(()=>{ if(time===0 && attemptId && !busy && startedRef.current){ void submit(); } },[time,attemptId,busy]);
 
-  async function fullscreen(){try{await document.documentElement.requestFullscreen()}catch{setMessage('Fullscreen is not available in this browser.')}}
+  useEffect(()=>{const onFullscreenChange=()=>setFocusMode(Boolean(document.fullscreenElement));document.addEventListener('fullscreenchange',onFullscreenChange);return()=>document.removeEventListener('fullscreenchange',onFullscreenChange)},[]);
+  async function fullscreen(){if(focusMode){if(document.fullscreenElement)await document.exitFullscreen();else setFocusMode(false);return;}try{await document.documentElement.requestFullscreen()}catch{setFocusMode(true)}}
   useEffect(()=>{const onKey=(event:KeyboardEvent)=>{if((event.ctrlKey||event.metaKey)&&['c','v','x'].includes(event.key.toLowerCase())){event.preventDefault();setEvents(prev=>[...prev,'clipboard_attempt'].slice(-50));}};document.addEventListener('keydown',onKey);return()=>document.removeEventListener('keydown',onKey)},[]);
     useEffect(()=>{const onExitClick=(event:MouseEvent)=>{const target=event.target as HTMLElement;const link=target.closest('a[href="/dashboard/tests"]');if(!link)return;if(!window.confirm('Are you sure you want to exit this test? Your current attempt will not be submitted.'))event.preventDefault();};document.addEventListener('click',onExitClick);return()=>document.removeEventListener('click',onExitClick)},[]);
   async function submit(){setBusy(true);const response=await fetch('/api/tests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'submit',testId:params.id,attemptId,answers,suspiciousEvents:events})});const data=await response.json();if(!response.ok)setMessage(data.error||'Unable to submit.');else router.replace(`/tests/${params.id}/result?attemptId=${encodeURIComponent(data.attemptId)}`);setBusy(false)}

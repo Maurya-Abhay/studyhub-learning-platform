@@ -1,6 +1,5 @@
 import { DashboardShell } from '@/components/dashboard/dashboard-shell';
 import { RoadmapView } from '@/components/dashboard/roadmap-view';
-import { RoadmapExplorer } from '@/components/dashboard/roadmap-explorer';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 
@@ -64,43 +63,24 @@ export default async function RoadmapPage() {
     .filter((course) => course.topics.length);
 
   const myRoadmaps = allRoadmaps.filter((course) => enrolledIds.has(course.id));
-  const availableRoadmaps = allRoadmaps.filter((course) => !enrolledIds.has(course.id));
-
-  const exploreRoadmaps = (courses ?? [])
-    .filter((course) => !enrolledIds.has(course.id))
-    .map((course) => {
-      const topics = buildTopics(course.id);
-      const categories = [...new Set((categoryLinks ?? []).filter((link) => link.course_id === course.id).map((link) => categoryMap.get(link.category_id)).filter(Boolean))] as string[];
-      return { id: course.id, title: course.title, slug: course.slug, description: course.description ?? '', categories, topicCount: topics.length };
-    })
-    .filter((course) => course.topicCount > 0);
-
   const totalTopics = new Set([...myRoadmaps.flatMap((course) => course.topics.map((topic) => topic.id))]).size;
   const completedTopics = myRoadmaps.flatMap((course) => course.topics).filter((topic) => topic.progress === 100).length;
 
   return (
     <DashboardShell>
-      <div className="eyebrow">My learning</div>
-      <h1 className="title" style={{ fontSize: 38 }}>Roadmap</h1>
-      <p className="subtitle">Follow a structured path across every category — track progress, pick up where you left off, and start new roadmaps anytime.</p>
+      <div className="dashboard-roadmap-page">
+      <div className="breadcrumbs dashboard-course-breadcrumb">Dashboard / Roadmap</div>
+      <h1 className="title dashboard-page-title">Roadmap</h1>
 
       <div className="dash-grid" style={{ marginTop: 18 }}>
         <div className="surface dash-card"><div className="kpi-num">{myRoadmaps.length}</div><div className="kpi-label">Roadmaps in progress</div></div>
         <div className="surface dash-card"><div className="kpi-num">{completedTopics}/{totalTopics}</div><div className="kpi-label">Topics completed</div></div>
-        <div className="surface dash-card"><div className="kpi-num">{exploreRoadmaps.length}</div><div className="kpi-label">Roadmaps to explore</div></div>
       </div>
 
       <div style={{ marginTop: 24 }}>
-        <div className="section-head"><div><h2 className="title" style={{ fontSize: 22 }}>{myRoadmaps.length ? 'Your roadmaps' : 'Available roadmaps'}</h2><p className="subtitle">{myRoadmaps.length ? 'Continue the courses you have started.' : 'Browse published course topics and start a roadmap when you are ready.'}</p></div></div>
-        {myRoadmaps.length || availableRoadmaps.length ? <RoadmapView courses={myRoadmaps.length ? myRoadmaps : availableRoadmaps} /> : <div className="surface empty roadmap-empty-state"><strong>No roadmap topics are linked yet</strong><p>Publish a course and link published topics from the admin course editor to show its learning path here.</p><a className="btn secondary small" href="/study/courses">Browse published courses</a></div>}
+        {myRoadmaps.length ? <><div className="section-head"><div><h2 className="title" style={{ fontSize: 22 }}>Your roadmaps</h2><p className="subtitle">Continue the courses you have started.</p></div></div><RoadmapView courses={myRoadmaps} /></> : <div className="surface empty roadmap-empty-state"><strong>No roadmap started yet</strong><p>Choose a course first. After you accept its rules and start it, the roadmap will appear here.</p><a className="btn primary small" href="/dashboard/courses">Browse courses</a></div>}
       </div>
-
-      {myRoadmaps.length && exploreRoadmaps.length ? (
-        <div style={{ marginTop: 28 }}>
-          <div className="section-head"><div><h2 className="title" style={{ fontSize: 22 }}>Explore roadmaps</h2><p className="subtitle">Start any published roadmap — it's added to your dashboard instantly.</p></div></div>
-          <RoadmapExplorer roadmaps={exploreRoadmaps} />
-        </div>
-      ) : null}
+      </div>
     </DashboardShell>
   );
 }

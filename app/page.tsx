@@ -57,8 +57,7 @@ export default async function Home() {
                 </h1>
 
                 <p className="subtitle hero-subtitle">
-                  Learn through structured courses, focused topics and
-                  practical coding. Everything stays organized in one place.
+                  Courses, notes and practice in one focused workspace.
                 </p>
 
                 <div className="hero-search-wrap">
@@ -139,15 +138,12 @@ export default async function Home() {
           <div className="container">
             <div className="section-head">
               <div>
-                <div className="eyebrow">Explore categories</div>
-
                 <h2 className="title">
-                  Choose what you want to learn
+                  Explore categories
                 </h2>
 
                 <p className="subtitle">
-                  Browse published learning paths and continue from exactly
-                  where you want to start.
+                  Start with a topic and learn at your own pace.
                 </p>
               </div>
 
@@ -202,54 +198,10 @@ export default async function Home() {
         <section className="section section-tight">
           <div className="container">
             <div className="section-head">
-              <div><div className="eyebrow">Featured learning paths</div><h2 className="title">Start with a course, not a blank page.</h2><p className="subtitle">Admin-published courses automatically appear here, with the same source of truth used across learner and admin views.</p></div>
+              <div><h2 className="title">Courses</h2><p className="subtitle">Follow a structured path from start to finish.</p></div>
               <Link className="btn secondary small" href="/study/courses">Browse courses <ArrowRight size={14}/></Link>
             </div>
             {resolvedFeaturedCourses.length ? <div className="course-card-grid">{resolvedFeaturedCourses.map(course => <CourseCard key={course.id} course={course}/>)}</div> : <div className="surface empty"><strong>No courses published yet.</strong><p>Publish a course from the admin workspace and it will appear here automatically.</p></div>}
-          </div>
-        </section>
-
-        {/* VALUE STRIP */}
-        <section className="section section-tight">
-          <div className="container">
-            <div className="learning-strip">
-              <div className="learning-strip-item">
-                <div className="learning-strip-icon">
-                  <BookOpen size={16} />
-                </div>
-
-                <div>
-                  <strong>Learn at your pace</strong>
-                  <span>Structured topics with a clear path forward.</span>
-                </div>
-              </div>
-
-              <div className="learning-strip-divider" />
-
-              <div className="learning-strip-item">
-                <div className="learning-strip-icon">
-                  <Code2 size={16} />
-                </div>
-
-                <div>
-                  <strong>Practice when it matters</strong>
-                  <span>Code exercises only where hands-on work belongs.</span>
-                </div>
-              </div>
-
-              <div className="learning-strip-divider" />
-
-              <div className="learning-strip-item">
-                <div className="learning-strip-icon">
-                  <Sparkles size={16} />
-                </div>
-
-                <div>
-                  <strong>Track your progress</strong>
-                  <span>Save progress, complete courses and earn certificates.</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 

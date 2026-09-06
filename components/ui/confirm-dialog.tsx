@@ -6,6 +6,7 @@ import { createContext, useContext, useState } from 'react';
  type ConfirmOptions = {
   title?: string;
   message: string;
+  details?: string[];
   confirmLabel?: string;
   cancelLabel?: string;
   danger?: boolean;
@@ -37,6 +38,7 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
             <div className={`confirm-icon ${request.danger ? 'danger' : ''}`}><Check size={18} /></div>
             <h2 id="confirm-title">{request.title ?? 'Please confirm'}</h2>
             <p>{request.message}</p>
+            {request.details?.length ? <ul className="confirm-details">{request.details.map((detail) => <li key={detail}>{detail}</li>)}</ul> : null}
             <div className="confirm-actions">
               <button type="button" className="btn secondary" onClick={() => close(false)}>{request.cancelLabel ?? 'Cancel'}</button>
               <button type="button" className={`btn ${request.danger ? 'danger-btn' : 'primary'}`} onClick={() => close(true)}>{request.confirmLabel ?? 'Confirm'}</button>
