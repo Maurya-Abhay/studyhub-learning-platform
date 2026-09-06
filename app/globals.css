@@ -4052,6 +4052,51 @@ html.dark .topbar { background: rgba(7, 11, 20, .78); border-color: rgba(124, 14
   background: var(--panel);
   border-color: var(--line);
 }
+
+@media (max-width: 560px) {
+  .dashboard-main.admin-manager-page,
+  .dashboard-main.category-page {
+    padding-inline: 8px;
+  }
+
+  .admin-manager-page .surface.card,
+  .category-page .surface.card {
+    padding: 10px;
+  }
+
+  .admin-manager-page .list-row,
+  .category-page .list-row {
+    align-items: flex-start;
+    gap: 6px;
+    padding: 9px 0;
+  }
+
+  .admin-manager-page .list-row > div:first-child,
+  .category-page .list-row > div:first-child {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .admin-manager-page .list-row .topic-actions,
+  .category-page .list-row .topic-actions {
+    flex: 0 0 130px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .admin-manager-page .list-row .chip,
+  .category-page .list-row .chip {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding-inline: 6px;
+  }
+
+  .admin-manager-page .list-row .icon-btn,
+  .category-page .list-row .icon-btn {
+    flex: 0 0 30px;
+  }
+}
 .admin-kpis .kpi-num { color: var(--text); }
 .admin-kpis .kpi-label { color: var(--muted); }
 
