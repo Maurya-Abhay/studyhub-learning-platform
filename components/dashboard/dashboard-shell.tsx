@@ -24,7 +24,7 @@ const adminLinks = [
 
 const adminPageLabels: Record<string, string> = {
   '/admin': 'Dashboard',
-  '/profile': 'Profile',
+  '/profile': 'Profile', '/admin/profile': 'Profile',
   '/admin/categories': 'Categories',
   '/admin/topics': 'Topics',
   '/admin/courses': 'Courses',
@@ -122,7 +122,7 @@ export function DashboardShell({ children, admin = false }: { children: React.Re
               </div> : null}
             </div>)}
           </div>
-          <Link href="/profile" className={`dashboard-sidebar-profile ${pathname === '/profile' ? 'active' : ''}`}>
+          <Link href={isAdmin ? '/admin/profile' : '/profile'} className={`dashboard-sidebar-profile ${pathname === '/profile' || pathname === '/admin/profile' ? 'active' : ''}`}>
             <UserRound size={15} />
             <span>Profile</span>
           </Link>
@@ -131,7 +131,7 @@ export function DashboardShell({ children, admin = false }: { children: React.Re
             <span>Logout</span>
           </button>
         </aside>
-        <main className={`dashboard-main ${!isAdmin && pathname !== '/dashboard' ? 'learner-page' : ''} ${pathname.startsWith('/admin/') ? 'admin-compact-page' : ''} ${pathname === '/profile' ? 'profile-page' : ''} ${pathname === '/admin/categories' ? 'category-page' : ''} ${['/admin/topics', '/admin/courses', '/admin/roadmaps', '/admin/questions', '/admin/tests', '/admin/dsa'].includes(pathname) ? 'admin-manager-page' : ''}`}>
+        <main className={`dashboard-main ${!isAdmin && pathname !== '/dashboard' ? 'learner-page' : ''} ${pathname.startsWith('/admin/') ? 'admin-compact-page' : ''} ${pathname === '/profile' || pathname === '/admin/profile' ? 'profile-page' : ''} ${pathname === '/admin/categories' ? 'category-page' : ''} ${['/admin/topics', '/admin/courses', '/admin/roadmaps', '/admin/questions', '/admin/tests', '/admin/dsa'].includes(pathname) ? 'admin-manager-page' : ''}`}>
           {(isAdmin || pathname === '/profile') && adminPageLabels[pathname] ? <div className="portal-breadcrumb">{pathname === '/admin' ? 'Dashboard' : `Dashboard / ${adminPageLabels[pathname]}`}</div> : null}
           {children}
         </main>

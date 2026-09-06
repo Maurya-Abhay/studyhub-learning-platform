@@ -208,7 +208,7 @@ export function Topbar({
 
           {isAuthenticated ? (
             <>
-              <Link className="btn secondary small desktop-auth" href="/profile">
+              <Link className="btn secondary small desktop-auth" href={pathname.startsWith('/admin') ? '/admin/profile' : '/profile'}>
                 <UserRound size={14} strokeWidth={1.8} />
                 Profile
               </Link>

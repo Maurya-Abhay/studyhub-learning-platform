@@ -2503,11 +2503,15 @@ html.dark .public-shell.reference-dark {
 .profile-scan-card { display:flex; align-items:center; gap:11px; }
 .profile-scan-visual { display:grid; place-items:center; width:66px; height:66px; flex:0 0 66px; border:1px solid color-mix(in srgb,var(--brand) 34%,var(--line)); border-radius:12px; color:var(--brand-2); background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--brand) 8%,transparent),color-mix(in srgb,var(--brand) 8%,transparent) 2px,transparent 2px,transparent 5px); }
 .profile-scan-visual span { font-size:10px; font-weight:800; letter-spacing:.08em; }
+.profile-scan-visual img { display:block; width:54px; height:54px; border-radius:4px; background:#fff; }
 .profile-scan-card strong, .profile-scan-card small, .profile-scan-card code { display:block; }
 .profile-scan-card strong { font-size:12px; }
 .profile-scan-card small { margin:4px 0 7px; color:var(--muted); font-size:10px; line-height:1.35; }
 .profile-scan-card code { color:var(--brand-2); font:700 10px "IBM Plex Mono",Consolas,monospace; letter-spacing:.1em; }
 .profile-metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin-top:12px; }
+.admin-profile .profile-content-grid,
+.admin-profile .profile-lower-grid { display:none; }
+.admin-profile-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); }
 .profile-metric { display:flex; align-items:center; gap:9px; min-width:0; padding:13px 11px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
 .profile-metric-icon { display:grid; place-items:center; width:32px; height:32px; flex:0 0 32px; border-radius:9px; }
 .profile-metric-icon.blue { color:#3b82f6; background:#eff6ff; }.profile-metric-icon.violet { color:#7c3aed; background:#f5f3ff; }.profile-metric-icon.green { color:#059669; background:#ecfdf5; }.profile-metric-icon.orange { color:#d97706; background:#fffbeb; }.profile-metric-icon.pink { color:#db2777; background:#fdf2f8; }.profile-metric-icon.teal { color:#0d9488; background:#f0fdfa; }
