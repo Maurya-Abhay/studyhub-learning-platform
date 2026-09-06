@@ -4041,6 +4041,10 @@ html.dark .topbar { background: rgba(7, 11, 20, .78); border-color: rgba(124, 14
 .admin-manager-page > div > .two-col > .surface.card:last-child,
 .category-page > .two-col > .surface.card:last-child { max-height: 720px; overflow-y: auto; }
 .roadmap-existing-list { max-height: 560px; overflow-y: auto; }
+.roadmap-course-description { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.roadmap-course-details { margin-top: 10px; border: 1px solid var(--line); border-radius: 9px; background: color-mix(in srgb, var(--panel-2) 55%, transparent); }
+.roadmap-course-details summary { padding: 8px 10px; color: var(--brand-2); cursor: pointer; font-size: 11px; font-weight: 650; }
+.roadmap-course-content { padding: 0 10px 10px; color: var(--muted); font-size: 11px; line-height: 1.65; white-space: pre-wrap; }
 .admin-manager-page .question-bank { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .admin-manager-page .question-bank:last-child { border-bottom: 0; }
 .admin-manager-page .question-bank-head { display: grid; gap: 8px; }
@@ -4203,6 +4207,44 @@ html.dark .dashboard-nav .side-link.active {
   align-items: start;
   gap: 10px;
   margin-top: 10px;
+}
+
+.admin-footer {
+  width: 100%;
+  min-height: 48px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.admin-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 22px 6px 232px;
+}
+
+.admin-footer-brand,
+.admin-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-footer-brand { color: var(--text); font-weight: 650; }
+.admin-footer-brand svg { color: var(--good); }
+.admin-footer-copy { margin-left: auto; }
+.admin-footer-link { padding: 6px 9px; border: 1px solid color-mix(in srgb, var(--brand) 28%, var(--line)); border-radius: 8px; color: var(--brand-2); background: color-mix(in srgb, var(--brand) 7%, var(--panel)); font-weight: 650; }
+.admin-footer-link:hover { color: var(--text); }
+
+@media (max-width: 560px) {
+  .admin-footer-inner { flex-wrap: wrap; min-height: 44px; padding: 6px 9px; gap: 6px 10px; font-size: 9px; }
+  .admin-footer-copy { margin-left: 0; }
+  .admin-footer-link { margin-left: auto; }
 }
 
 .dashboard-sidebar-logout:hover {

@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
     supabase.from('personal_notes').select('id,content,updated_at,study_topics(id,title,slug)').eq('user_id', user.id).order('updated_at', { ascending: false }),
     supabase.from('enrollments').select('course_id,courses(id,title,slug)').eq('user_id', user.id).order('started_at', { ascending: false }),
   ]);
-  const notes = (noteRows ?? []).map((item) => { const topic = Array.isArray(item.study_topics) ? item.study_topics[0] : item.study_topics; return { id: item.id, content: item.content, updatedAt: item.updated_at, topicTitle: topic?.title ?? 'Untitled topic', topicSlug: topic?.id }; });
+  const notes = (noteRows ?? []).map((item) => { const topic = Array.isArray(item.study_topics) ? item.study_topics[0] : item.study_topics; return { id: item.id, content: item.content, updatedAt: item.updated_at, topicTitle: topic?.title ?? 'Untitled topic', topicSlug: topic?.slug, topicId: topic?.id }; });
   const courseIds = (enrollments ?? []).map((item) => item.course_id);
   const { data: links } = courseIds.length ? await supabase.from('course_topics').select('course_id,sort_order,study_topics(id,title,slug,summary,category_id,study_categories(name))').in('course_id', courseIds).order('sort_order') : { data: [] };
   const topicIds = (links ?? []).map((link) => { const topic = Array.isArray(link.study_topics) ? link.study_topics[0] : link.study_topics; return topic?.id; }).filter(Boolean) as string[];

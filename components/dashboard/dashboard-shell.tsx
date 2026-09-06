@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BarChart3, Bell, BookOpen, CalendarDays, ChevronRight, DatabaseBackup, FileText, LayoutDashboard, ListChecks, LogOut, Users, BrainCircuit, Award, FolderKanban, Sparkles, Route, UserRound } from 'lucide-react';
+import { BarChart3, Bell, BookOpen, CalendarDays, ChevronRight, DatabaseBackup, FileText, LayoutDashboard, ListChecks, LogOut, Users, BrainCircuit, Award, FolderKanban, Sparkles, Route, UserRound, ShieldCheck } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Topbar } from '@/components/ui/topbar';
@@ -136,6 +136,7 @@ export function DashboardShell({ children, admin = false }: { children: React.Re
           {children}
         </main>
       </div>
+      {isAdmin ? <footer className="admin-footer"><div className="admin-footer-inner"><span className="admin-footer-brand"><ShieldCheck size={14} /> StudyHub Admin</span><span className="admin-footer-copy">© 2026 Abhay Prasad. All rights reserved.</span><Link href="/admin" className="admin-footer-link">Dashboard <ChevronRight size={13} /></Link></div></footer> : null}
     </div>
   );
 }

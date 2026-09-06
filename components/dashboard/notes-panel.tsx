@@ -9,6 +9,7 @@ type Note = {
   updatedAt: string;
   topicTitle: string;
   topicSlug?: string;
+  topicId?: string;
 };
 
 export function NotesPanel({ notes }: { notes: Note[] }) {
@@ -28,14 +29,14 @@ export function NotesPanel({ notes }: { notes: Note[] }) {
   }
 
   async function saveNote() {
-    if (!selected || !selected.topicSlug) return;
+    if (!selected || !selected.topicId) return;
     setSaving(true);
     setMessage('');
     try {
       const response = await fetch('/api/notes', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ topicId: selected.topicSlug, content }),
+        body: JSON.stringify({ topicId: selected.topicId, content }),
       });
       const data = await response.json();
       setMessage(response.ok ? 'Note saved.' : data.error || 'Unable to save note.');

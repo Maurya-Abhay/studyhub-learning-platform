@@ -14,7 +14,7 @@ export default async function RoadmapPage() {
   const contentClient = process.env.SUPABASE_SERVICE_ROLE_KEY ? createAdminClient() : supabase;
 
   const [{ data: courses, error: coursesError }, { data: enrollments, error: enrollmentsError }, { data: categoryLinks, error: categoryLinksError }] = await Promise.all([
-    contentClient.from('courses').select('id,title,slug,description').eq('published', true).order('title'),
+    contentClient.from('courses').select('id,title,slug,description,content').eq('published', true).order('title'),
     supabase.from('enrollments').select('course_id').eq('user_id', user.id),
     contentClient.from('course_categories').select('course_id,category_id,sort_order').order('sort_order'),
   ]);
@@ -60,7 +60,7 @@ export default async function RoadmapPage() {
   }
 
   const allRoadmaps = (courses ?? [])
-    .map((course) => ({ id: course.id, title: course.title, slug: course.slug, topics: buildTopics(course.id) }))
+    .map((course) => ({ id: course.id, title: course.title, slug: course.slug, description: course.description ?? '', content: course.content ?? '', topics: buildTopics(course.id) }))
     .filter((course) => course.topics.length);
 
   const myRoadmaps = allRoadmaps.filter((course) => enrolledIds.has(course.id));
